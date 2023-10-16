@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Source
+main.cpp
+
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +33,10 @@
 *.exe
 *.out
 *.app
+
+# Build output
+build
+test
+
+# Experimental features
+experimental

@@ -18,14 +18,20 @@ add_library(phoenixShared SHARED
     ${SOURCES}
 )
 
+add_executable(a.out
+    ${HEADERS}
+    ${SOURCES}
+)
+
 # Configuration
 set(INCLUDE_DIRECTORIES 
     "${CMAKE_SOURCE_DIR}/source/"
+    "${CMAKE_SOURCE_DIR}/source/experimental"
 )
 
 set(COMPILATION_FLAGS
     -std=c++23 -fPIC 
-    -Wall -Wextra -Werror -Wpedantic -g 
+    # -Wall -Wextra -Werror -Wpedantic -g 
 )
 
 set(LIBRARY_LINK_FLAGS
@@ -42,6 +48,15 @@ target_compile_options(phoenixShared PRIVATE
     ${COMPILATION_FLAGS}
 )
 
+target_compile_options(a.out PRIVATE 
+    ${COMPILATION_FLAGS}
+)
+
+# Library link
+target_link_libraries(a.out PRIVATE 
+    ${LIBRARY_LINK_FLAGS}
+)
+
 # Header include
 target_include_directories(phoenixStatic PRIVATE 
     ${INCLUDE_DIRECTORIES}
@@ -51,9 +66,14 @@ target_include_directories(phoenixShared PRIVATE
     ${INCLUDE_DIRECTORIES}
 )
 
+target_include_directories(a.out PRIVATE 
+    ${INCLUDE_DIRECTORIES}
+)
+
 # Target properties
-set_target_properties(phoenixStatic phoenixShared PROPERTIES 
+set_target_properties(phoenixStatic phoenixShared a.out PROPERTIES 
     OUTPUT_NAME "Phoenix"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/test"
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/"
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/"
 )

@@ -37,6 +37,3 @@ main.cpp
 # Build output
 build
 test
-
-# Experimental features
-experimental

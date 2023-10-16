@@ -15,6 +15,7 @@
 
 /* --------------------------------- system --------------------------------- */
 
+#include "file.hpp"
 #include "input.hpp"
 #include "library.hpp"
 #include "log.hpp"

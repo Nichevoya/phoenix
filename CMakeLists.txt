@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project("Phoenix")
 
-file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/source/*.hpp")
-file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/source/*.cpp")
+file(GLOB_RECURSE HEADERS "./source/*.hpp")
+file(GLOB_RECURSE SOURCES "./source/*.cpp")
 
 add_library(phoenixStatic STATIC 
     ${HEADERS}
@@ -19,10 +19,6 @@ add_library(phoenixShared SHARED
 )
 
 # Configuration
-set(INCLUDE_DIRECTORIES 
-    "${CMAKE_SOURCE_DIR}/source/"
-)
-
 set(COMPILATION_FLAGS
     -std=c++23 -fPIC 
     -Wall -Wextra -Werror -Wpedantic -g 
@@ -53,7 +49,5 @@ target_include_directories(phoenixShared PRIVATE
 
 # Target properties
 set_target_properties(phoenixStatic phoenixShared PROPERTIES 
-    OUTPUT_NAME "Phoenix"
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/"
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/"
+    OUTPUT_NAME "phoenix"
 )

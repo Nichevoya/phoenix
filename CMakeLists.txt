@@ -49,5 +49,6 @@ target_include_directories(phoenixShared PRIVATE
 
 # Target properties
 set_target_properties(phoenixStatic phoenixShared PROPERTIES 
+    LINKER_LANGUAGE CXX
     OUTPUT_NAME "phoenix"
 )

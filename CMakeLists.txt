@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project("Phoenix")
 
-file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/source/*.hpp")
-file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/source/*.cpp")
+file(GLOB_RECURSE HEADERS "./source/*.hpp")
+file(GLOB_RECURSE SOURCES "./source/*.cpp")
 
 add_library(phoenixStatic STATIC 
     ${HEADERS}
@@ -25,13 +25,14 @@ add_executable(a.out
 
 # Configuration
 set(INCLUDE_DIRECTORIES 
-    "${CMAKE_SOURCE_DIR}/source/"
-    "${CMAKE_SOURCE_DIR}/source/experimental"
+    "./source/"
+    "./source/engine"
+    "./source/experimental"
 )
 
 set(COMPILATION_FLAGS
     -std=c++23 -fPIC 
-    # -Wall -Wextra -Werror -Wpedantic -g 
+    -Wall -Wextra -Werror -Wpedantic -g 
 )
 
 set(LIBRARY_LINK_FLAGS
@@ -72,8 +73,6 @@ target_include_directories(a.out PRIVATE
 
 # Target properties
 set_target_properties(phoenixStatic phoenixShared a.out PROPERTIES 
-    OUTPUT_NAME "Phoenix"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/test"
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/"
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/"
+    OUTPUT_NAME "phoenix"
+    LINKER_LANGUAGE CXX
 )

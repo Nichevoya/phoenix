@@ -19,3 +19,7 @@
 #include "input.hpp"
 #include "library.hpp"
 #include "log.hpp"
+
+/* --------------------------------- engine --------------------------------- */
+
+#include "coordinator.hpp"

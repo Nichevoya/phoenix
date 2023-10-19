@@ -44,7 +44,7 @@ namespace phoenix {
         private:
             std::random_device _seed;
             std::mt19937 _rng;
-            std::uniform_real_distribution<float> _dist;
+            std::uniform_real_distribution<double> _dist;
     };
 
 } // phoenix

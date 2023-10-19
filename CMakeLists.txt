@@ -27,7 +27,6 @@ add_executable(a.out
 set(INCLUDE_DIRECTORIES 
     "./source/"
     "./source/engine"
-    "./source/experimental"
 )
 
 set(COMPILATION_FLAGS
@@ -37,7 +36,6 @@ set(COMPILATION_FLAGS
 
 set(LIBRARY_LINK_FLAGS
     phoenixStatic 
-    phoenixShared 
 )
 
 # Compilation flags
@@ -49,12 +47,8 @@ target_compile_options(phoenixShared PRIVATE
     ${COMPILATION_FLAGS}
 )
 
-target_compile_options(a.out PRIVATE 
-    ${COMPILATION_FLAGS}
-)
-
-# Library link
-target_link_libraries(a.out PRIVATE 
+# Link libraries
+target_link_libraries(phoenixShared PRIVATE
     ${LIBRARY_LINK_FLAGS}
 )
 
@@ -72,7 +66,7 @@ target_include_directories(a.out PRIVATE
 )
 
 # Target properties
-set_target_properties(phoenixStatic phoenixShared a.out PROPERTIES 
-    OUTPUT_NAME "phoenix"
+set_target_properties(phoenixStatic phoenixShared PROPERTIES 
     LINKER_LANGUAGE CXX
+    OUTPUT_NAME "phoenix"
 )

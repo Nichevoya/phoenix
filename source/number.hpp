@@ -49,6 +49,11 @@ namespace phoenix {
                 std::cout << "Type is int32_t." << std::endl;
             }
 
+            void type_specific_operation(float)
+            {
+                std::cout << "Type is float." << std::endl;
+            }
+
             void type_specific_operation(double)
             {
                 std::cout << "Type is double." << std::endl;

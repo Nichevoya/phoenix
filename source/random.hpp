@@ -32,6 +32,22 @@ namespace phoenix {
     };
 
     template <>
+    class random<float> : public number<float> {
+        public:
+            friend std::ostream &operator<<(std::ostream &os, const random<float> &value) { return os << value.get(); }
+            
+            random() : number<float>(0.0f), _rng(_seed()), _dist(-10.0f, 10.0f) {  set(_dist(_rng)); }
+            random(const float &from, const float &to) : number<float>(0.0f), _rng(_seed()), _dist(from, to) { set(_dist(_rng)); }
+            ~random() = default;
+    
+        protected:
+        private:
+            std::random_device _seed;
+            std::mt19937 _rng;
+            std::uniform_real_distribution<float> _dist;
+    };
+
+    template <>
     class random<double> : public number<double> {
         public:
             friend std::ostream &operator<<(std::ostream &os, const random<double> &value) { return os << value.get(); }
@@ -44,7 +60,7 @@ namespace phoenix {
         private:
             std::random_device _seed;
             std::mt19937 _rng;
-            std::uniform_real_distribution<float> _dist;
+            std::uniform_real_distribution<double> _dist;
     };
 
 } // phoenix

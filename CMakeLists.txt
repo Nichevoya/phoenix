@@ -26,7 +26,6 @@ set(COMPILATION_FLAGS
 
 set(LIBRARY_LINK_FLAGS
     phoenixStatic 
-    phoenixShared 
 )
 
 # Compilation flags
@@ -36,6 +35,11 @@ target_compile_options(phoenixStatic PRIVATE
 
 target_compile_options(phoenixShared PRIVATE 
     ${COMPILATION_FLAGS}
+)
+
+# Link libraries
+target_link_libraries(phoenixShared PRIVATE
+    ${LIBRARY_LINK_FLAGS}
 )
 
 # Header include

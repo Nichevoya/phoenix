@@ -28,6 +28,11 @@ set(LIBRARY_LINK_FLAGS
     phoenixStatic 
 )
 
+set(INCLUDE_DIRECTORIES 
+    "./source/"
+    "./source/engine"
+)
+
 # Compilation flags
 target_compile_options(phoenixStatic PRIVATE 
     ${COMPILATION_FLAGS}

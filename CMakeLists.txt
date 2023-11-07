@@ -29,7 +29,7 @@ elseif(WIN32)
     add_definitions(-DWIN32)
 
     set(COMPILATION_FLAGS
-        /std:c++23 
+        /std:c++20 
         /W4 /Zi 
     )
 
@@ -58,11 +58,6 @@ add_library(phoenixShared SHARED
     ${SOURCES}
 )
 
-add_executable(a.out
-    ${HEADERS}
-    ${SOURCES}
-)
-
 # ---------------------------- compilation flags --------------------------- 
 
 target_compile_options(phoenixStatic PRIVATE 
@@ -73,18 +68,10 @@ target_compile_options(phoenixShared PRIVATE
     ${COMPILATION_FLAGS}
 )
 
-target_compile_options(a.out PRIVATE 
-    ${COMPILATION_FLAGS}
-)
-
 # ----------------------------- link libraries ----------------------------- 
 
 target_link_libraries(phoenixShared PRIVATE 
     ${LIBRARY_LINK_FLAGS}
-)
-
-target_link_libraries(a.out PRIVATE 
-    phoenixShared
 )
 
 # ----------------------------- header include ----------------------------- 
@@ -97,13 +84,9 @@ target_include_directories(phoenixShared PRIVATE
     ${INCLUDE_DIRECTORIES}
 )
 
-target_include_directories(a.out PRIVATE 
-    ${INCLUDE_DIRECTORIES}
-)
-
 # ---------------------------- target properties --------------------------- 
 
-set_target_properties(phoenixStatic phoenixShared a.out PROPERTIES 
+set_target_properties(phoenixStatic phoenixShared PROPERTIES 
     OUTPUT_NAME "phoenix"
     LINKER_LANGUAGE CXX
 )

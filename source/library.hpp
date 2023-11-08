@@ -100,10 +100,19 @@
                     std::string _file, _path, _entry_point;
             };
 
-        } // Load
+        } // load
 
     } // phoenix
 
 #elif WIN32
+
+    namespace phoenix {
+
+        namespace load {
+            
+        } // load
+        
+    } // phoenix
+    
 
 #endif

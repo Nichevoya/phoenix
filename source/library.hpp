@@ -43,7 +43,7 @@
                     library() = default;
                     library(const library &) = delete;
                     library(const library &&) = delete;
-                    library(const std::string &file, const std::string &entry_point = "entry_point") : _file(file), _path(file.substr(file.find_last_of('/') + 1, file.size())), _entry_point(entry_point) {}
+                    library(const std::string &file, const std::string &entry_point = "entry_point") : _file(file), _path(file.substr(file.find_last_of('/') + 1, file.size())), _entry_point(entry_point) { format(); }
                     ~library()
                     {
                         if (_handler.get() != nullptr) _handler.close();
@@ -54,18 +54,16 @@
                     {
                         using unique = typename smart_type_allocator<T>::unique;
                         if (!_handler.open(_file)) throw std::runtime_error(_handler.error());
-                        std::cout << "Handled library: " << name() << std::endl;
                         return _handler.load<unique>(_entry_point)();
                     }
 
                     template <typename T>
-                    std::unique_ptr<T> load_unique(const std::string &file, const std::string &entry_point = "entry_point")
+                    std::unique_ptr<T> load_unique(std::string &file, const std::string &entry_point = "entry_point")
                     {
                         using unique = typename smart_type_allocator<T>::unique;
+                        format(file);
                         if (!_handler.open(file)) throw std::runtime_error(_handler.error());
                         _file = file;
-                        _path = _file.substr(_file.find_last_of('/') + 1, _file.size());
-                        std::cout << "Handled library: " << name() << std::endl;
                         return _handler.load<unique>(_entry_point)();
                     }
 
@@ -74,27 +72,92 @@
                     {
                         using shared = typename smart_type_allocator<T>::shared;
                         if (!_handler.open(_file)) throw std::runtime_error(_handler.error());
-                        std::cout << "Handled library: " << name() << std::endl;
                         return _handler.load<shared>(_entry_point)();
                     }
 
                     template <typename T>
-                    std::shared_ptr<T> load_shared(const std::string &file, const std::string &entry_point = "entry_point")
+                    std::shared_ptr<T> load_shared(std::string &file, const std::string &entry_point = "entry_point")
                     {
                         using shared = typename smart_type_allocator<T>::shared;
+                        format(file);
                         if (!_handler.open(file)) throw std::runtime_error(_handler.error());
                         _file = file;
-                        _path = _file.substr(_file.find_last_of('/') + 1, _file.size());
-                        std::cout << "Handled library: " << name() << std::endl;
                         return _handler.load<shared>(_entry_point)();
                     }
 
                     void free(void) const { _handler.close(); }
 
-                    const std::string &path(void) const & { return _path; }
-
                     const std::string &name(void) const & { return _file; }
 
+                    const std::string extension(void) const & { return _file.substr(_file.find_last_of('.') + 1); }
+
+                    const std::string path(void) const & { return _file.substr(_file.find_last_of('/') + 1, _file.size()); }
+
+                protected:
+                    void format(void)
+                    {
+                        matches();
+                        extender();
+                        executor();
+                    }
+
+                    void format(std::string &file)
+                    {
+                        matches(file);
+                        extender(file);
+                        executor(file);
+                    }
+                    
+                    void executor(void)
+                    {
+                        if (_file.substr(0, 2) == "./") return;
+                        _file = "./" + _file;
+                        std::cout << _file << std::endl;
+                    }
+
+                    void executor(std::string &file)
+                    {
+                        if (file.substr(0, 2) == "./") return;
+                        file = "./" + file;
+                        std::cout << file << std::endl;
+                    }
+
+                    void matches(void)
+                    {
+                        if (_file.substr(0, 3) == "lib") return;
+                        else if (_file.substr(0, 2) == "./") {
+                            _file = "./lib" + _file.substr(_file.find_first_of("./") + 2, _file.size());
+                            return;
+                        }
+                        _file = "lib" + _file;
+                        std::cout << _file << std::endl;
+                    }
+
+                    void matches(std::string &file)
+                    {
+                        if (file.substr(0, 3) == "lib") return;
+                        else if (file.substr(0, 2) == "./") {
+                            file = "./lib" + _file.substr(_file.find_first_of("./") + 2, _file.size());
+                            return;
+                        }
+                        file = "lib" + file;
+                        std::cout << file << std::endl;
+                    }
+
+                    void extender(void)
+                    {
+                        if (extension() == "so") return;
+                        _file = _file + ".so";
+                        std::cout << _file << std::endl;
+                    }
+
+                    void extender(std::string &file)
+                    {
+                        if (extension() == "so") return;
+                        file = file + ".so";
+                        std::cout << file << std::endl;
+                    }
+                
                 private:
                     handler _handler;
                     std::string _file, _path, _entry_point;

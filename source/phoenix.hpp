@@ -28,6 +28,10 @@
 #include "library.hpp"
 #include "log.hpp"
 
+/* --------------------------------- memory --------------------------------- */
+
+#include "experimental/unique_void_ptr.hpp"
+
 /* --------------------------------- engine --------------------------------- */
 
 #include "engine/coordinator.hpp"

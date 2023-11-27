@@ -1,6 +1,7 @@
 #pragma once
 
 #include "std.hpp"
+#include "experimental/unique_void_ptr.hpp"
 
 #ifdef UNIX
 
@@ -13,6 +14,7 @@
                 public:
                     typedef std::unique_ptr<T> (*unique)();
                     typedef std::shared_ptr<T> (*shared)();
+                    typedef phoenix::experimental::unique_void_ptr (*any)();
             };
 
             class handler {
@@ -47,6 +49,14 @@
                     ~library()
                     {
                         if (_handler.get() != nullptr) _handler.close();
+                    }
+
+                    template <typename T>
+                    T *load_unique_void(void)
+                    {
+                        using any = typename smart_type_allocator<void>::any;
+                        if (!_handler.open(_file)) throw std::runtime_error(_handler.error());
+                        return static_cast<const T *>(_handler.load<any>(_entry_point)().get());
                     }
 
                     template <typename T>
@@ -96,14 +106,12 @@
                 protected:
                     void format(void)
                     {
-                        matches();
                         extender();
                         executor();
                     }
 
                     void format(std::string &file)
                     {
-                        matches(file);
                         extender(file);
                         executor(file);
                     }
@@ -119,28 +127,6 @@
                     {
                         if (file.substr(0, 2) == "./") return;
                         file = "./" + file;
-                        std::cout << file << std::endl;
-                    }
-
-                    void matches(void)
-                    {
-                        if (_file.substr(0, 3) == "lib") return;
-                        else if (_file.substr(0, 2) == "./") {
-                            _file = "./lib" + _file.substr(_file.find_first_of("./") + 2, _file.size());
-                            return;
-                        }
-                        _file = "lib" + _file;
-                        std::cout << _file << std::endl;
-                    }
-
-                    void matches(std::string &file)
-                    {
-                        if (file.substr(0, 3) == "lib") return;
-                        else if (file.substr(0, 2) == "./") {
-                            file = "./lib" + _file.substr(_file.find_first_of("./") + 2, _file.size());
-                            return;
-                        }
-                        file = "lib" + file;
                         std::cout << file << std::endl;
                     }
 

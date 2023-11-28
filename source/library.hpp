@@ -1,7 +1,6 @@
 #pragma once
 
 #include "std.hpp"
-#include "experimental/unique_void_ptr.hpp"
 
 #ifdef UNIX
 
@@ -87,6 +86,8 @@
                     void free(void) const { _handler.close(); }
 
                     const std::string &name(void) const & { return _file; }
+
+                    const std::string &entry_point(void) const & { return _entry_point; }
 
                     const std::string extension(void) const & { return _file.substr(_file.find_last_of('.') + 1); }
 

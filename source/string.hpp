@@ -8,27 +8,23 @@ namespace phoenix {
         public:
             friend std::ostream &operator<<(std::ostream &os, const string &other) { return os << other.get(); }
 
-            string() {}
+            operator std::string() const { return this->get(); }
+
+            string() = default;
 
             template <typename ...Args>
-            string(Args &&...args)
-            {
-                (_stream << ... << args);
-            }
+            string(Args &&...args) { (_stream << ... << args); }
 
             template <typename ...Args>
-            string(const Args &&...args)
-            {
-                (_stream << ... << args);
-            }
+            string(const Args &&...args) { (_stream << ... << args); }
             
             ~string() = default;
 
             std::string get(void) { return stream().str(); }
             const std::string get(void) const { return stream().str(); }
 
-            std::stringstream &stream(void) & { return _stream; }
-            const std::stringstream &stream(void) const & { return _stream; }
+            std::stringstream &stream(void) { return _stream; }
+            const std::stringstream &stream(void) const { return _stream; }
 
             template <typename ...Args>
             void input(Args &&...args)
@@ -70,9 +66,8 @@ namespace phoenix {
 
             const string endl(void)
             {
-                std::stringstream stream;
-                stream << std::endl;
-                return get().append(stream.str());
+                this->stream() << std::endl;
+                return get();
             }
 
         protected:

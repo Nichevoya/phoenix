@@ -14,31 +14,27 @@ namespace phoenix {
             string(Args &&...args)
             {
                 (_stream << ... << args);
-                set(_stream.str());
             }
 
             template <typename ...Args>
             string(const Args &&...args)
             {
                 (_stream << ... << args);
-                set(_stream.str());
             }
             
             ~string() = default;
 
-            void set(const std::string &str) { _str = str; }
-            
-            std::string &get(void) { return _str; }
-            const std::string &get(void) const { return _str; }
+            std::string get(void) { return stream().str(); }
+            const std::string get(void) const { return stream().str(); }
 
-            const std::stringstream &stream(void) const { return _stream; }
+            std::stringstream &stream(void) & { return _stream; }
+            const std::stringstream &stream(void) const & { return _stream; }
 
             template <typename ...Args>
             void input(Args &&...args)
             {
                 if (!get().empty()) clear();
                 (_stream << ... << args);
-                set(_stream.str());
             }
 
             template <typename ...Args>
@@ -58,7 +54,8 @@ namespace phoenix {
             {
                 std::smatch match;
                 std::regex regex(occurence);
-                while (std::regex_search(get(), match, regex)) return match.str();
+                const std::string &str = get();
+                while (std::regex_search(str, match, regex)) return match.str();
                 return "";
             }
 
@@ -66,7 +63,8 @@ namespace phoenix {
             {
                 std::smatch match;
                 std::regex regex(occurence);
-                while (std::regex_search(get(), match, regex)) return match.str();
+                const std::string &str = get();
+                while (std::regex_search(str, match, regex)) return match.str();
                 return "";
             }
 
@@ -79,7 +77,6 @@ namespace phoenix {
 
         protected:
         private:
-            std::string _str = "";
             std::stringstream _stream;
     };
 

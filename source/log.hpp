@@ -21,7 +21,7 @@ namespace phoenix {
         public:
             friend std::ostream &operator<<(std::ostream &os, const log &other) { return os << other.get(); }
 
-            log(const string &message = "", const colors &color = colors::none) : _color(color), _message(message.get().c_str()), _color_code(get_color_code())
+            log(const string &message = "", const colors &color = colors::none) : _color(color), _message(message), _color_code(get_color_code())
             {
                 _stream << "\033[" << _color_code << "m" << _message << "\033[0m";
             }

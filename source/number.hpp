@@ -30,6 +30,8 @@ namespace phoenix {
 
             void set_precision(int32_t precision) { _precision = precision; }
             
+            T get(void) { return _value; }
+
             T get(void) const { return _value; }
 
             const int32_t &get_precision(void) const & { return _precision; }

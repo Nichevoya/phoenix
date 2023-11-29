@@ -33,7 +33,7 @@ namespace phoenix {
         private:
             std::stringstream _stream;
             const colors &_color = colors::none;
-            const char *_message = "", *_color_code = "";
+            const std::string _message = "", _color_code = "";
 
             const char *get_color_code(void) const &
             {

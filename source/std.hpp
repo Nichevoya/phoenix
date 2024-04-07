@@ -11,6 +11,7 @@
 #elif WIN32
     #define platform "win32"
 
+    #include <windows.h>
 #endif
 
 #include <iostream>

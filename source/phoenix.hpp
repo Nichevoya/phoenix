@@ -27,6 +27,7 @@
 #include "input.hpp"
 #include "library.hpp"
 #include "log.hpp"
+#include "plugin.hpp"
 
 /* --------------------------------- memory --------------------------------- */
 

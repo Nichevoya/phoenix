@@ -68,7 +68,7 @@ namespace phoenix {
                 template <typename T>
                 void register_component(void)
                 {
-                    const char *type_name = typeid(T).name();
+                    const std::string type_name = typeid(T).name();
                     assert(_component_type_map.find(type_name) == _component_type_map.end() && "Registering component type more than once.");
                     // Add this component type to the component type map
                     _component_type_map.insert({type_name, _next_component_type});
@@ -81,7 +81,7 @@ namespace phoenix {
                 template <typename T>
                 component_type get_component_type(void)
                 {
-                    const char *type_name = typeid(T).name();
+                    const std::string type_name = typeid(T).name();
                     assert(_component_type_map.find(type_name) != _component_type_map.end() && "Component not registered before use.");
                     // Return this component's type - used for creating signatures
                     return _component_type_map[type_name];
@@ -125,15 +125,15 @@ namespace phoenix {
                 template <typename T>
                 std::shared_ptr<component_array<T>> get_component_array(void)
                 {
-                    const char *type_name = typeid(T).name();
+                    const std::string type_name = typeid(T).name();
                     assert(_component_type_map.find(type_name) != _component_type_map.end() && "Component not registered before use.");
                     return std::static_pointer_cast<component_array<T>>(_component_arrays[type_name]);
                 }
                 
                 // Map from type string pointer to a component type
-                std::unordered_map<const char *, component_type> _component_type_map = {};
+                std::unordered_map<std::string, component_type> _component_type_map = {};
                 // Map from type string pointer to a component array
-                std::unordered_map<const char *, std::shared_ptr<container>> _component_arrays = {};
+                std::unordered_map<std::string, std::shared_ptr<container>> _component_arrays = {};
                 // The component type to be assigned to the next registered component - starting at 0
                 component_type _next_component_type = {};
         };

@@ -9,6 +9,7 @@ namespace phoenix {
             friend std::ostream &operator<<(std::ostream &os, const string &other) { return os << other.get(); }
 
             operator std::string() const { return this->get(); }
+            operator std::size_t() const { return hash(this->get().c_str()); }
 
             string() = default;
 
@@ -68,6 +69,11 @@ namespace phoenix {
             {
                 this->stream() << std::endl;
                 return get();
+            }
+
+            constexpr std::size_t hash(const char* str, int h = 0) const 
+            {
+                return !str[h] ? 5381 : (hash(str, h+1) * 33) ^ str[h];
             }
 
         protected:

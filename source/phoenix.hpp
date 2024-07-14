@@ -1,13 +1,5 @@
 #pragma once
 
-#ifdef UNIX
-    #define platform "unix"
-
-#elif WIN32
-    #define platform "win32"
-
-#endif
-
 /* ----------------------------------- std ---------------------------------- */
 
 #include "std.hpp"

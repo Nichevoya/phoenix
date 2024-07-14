@@ -9,6 +9,11 @@ namespace phoenix {
             friend std::ostream &operator<<(std::ostream &os, const string &other) { return os << other.get(); }
 
             operator std::string() const { return this->get(); }
+            operator char *() const 
+            {
+                char *str = std::strcpy(str, this->get().c_str());
+                return str;
+            }
 
             string() = default;
 

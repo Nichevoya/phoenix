@@ -20,6 +20,7 @@
 
 #include "number.hpp"
 #include "random.hpp"
+#include "experimental/string_hash.hpp"
 
 /* --------------------------------- system --------------------------------- */
 

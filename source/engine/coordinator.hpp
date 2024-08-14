@@ -19,6 +19,11 @@ namespace phoenix {
                     _component_manager = std::make_unique<component_manager>();
                     _system_manager = std::make_unique<system_manager>();
                 }
+
+                bool entity_exist(const entity entity) 
+                {
+                    return _entity_manager->get_signature(entity).any();
+                }
                 
                 entity create_entity(void)
                 {

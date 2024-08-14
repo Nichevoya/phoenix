@@ -31,7 +31,6 @@ namespace phoenix {
                     _living_entity_count += 1;
                     return id;
                 }
-        
     
                 void destroy_entity(const entity entity)
                 {

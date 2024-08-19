@@ -1,9 +1,5 @@
 # Phoenix
 
-## Disclamer
-
-This is a personnal project, it has no pretention of perfection. While the code found in Phoenix library is mostly done by myself but it also include code and knowledge found on internet on site such as [StackOverflow](https://stackoverflow.com/).
-
 ## High level C++ library
 
 Phoenix is a custom library that implement high level methods seen in other programming languages such as Python, or Flutter, while keeping low level accessibility to them. It also serves as a wrapper of my experience and my knowledge of C++, its goals is to be as reusable as possible.

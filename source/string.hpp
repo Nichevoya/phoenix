@@ -64,6 +64,24 @@ namespace phoenix {
                 return "";
             }
 
+            string lowercase(void) 
+            {
+                std::string lower = get();
+                std::transform(lower.begin(), lower.end(), lower.begin(),
+                [] (unsigned char c) { return std::tolower(c); });
+
+                return lower;
+            }
+
+            string uppercase(void) 
+            {
+                std::string lower = get();
+                std::transform(lower.begin(), lower.end(), lower.begin(),
+                [] (unsigned char c) { return std::toupper(c); });
+
+                return lower;
+            }
+
             const string endl(void)
             {
                 this->stream() << std::endl;

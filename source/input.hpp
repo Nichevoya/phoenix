@@ -6,7 +6,7 @@ namespace phoenix {
     
     class input {
         public:                
-            friend std::ostream &operator<<(std::ostream &os, const input &input) { return os << input.get(); }
+            friend std::ostream &operator<<(std::ostream &os, const input &input) { return os << input.value(); }
             operator std::string() const  { return _input; }
 
             input(const input &) = delete;
@@ -24,8 +24,8 @@ namespace phoenix {
 
             ~input() = default;
 
-            const std::string &get(void) const { return _input; }
-            const std::string &get(const std::string &message = "", const std::string &prompt = "") 
+            const std::string &value(void) const { return _input; }
+            const std::string &grab(const std::string &message = "", const std::string &prompt = "") 
             {
                 _input = "";
                 _message = message;

@@ -87,8 +87,7 @@ namespace phoenix {
                     );
                 }
 
-                this->clear();
-                this->append(sanitized);
+                this->input(sanitized);
                 return *this;
             }
             

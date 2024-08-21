@@ -70,9 +70,26 @@ namespace phoenix {
 
             std::size_t size(void) const { return get().size(); }
 
-            //TODO - String sanitizer
+            const string &sanitize(const std::string &illegal_characters, const std::size_t &size) & 
+            {
+                if (this->size() != size) 
+                    return *this;
 
-            const string contains(const std::string &occurence) const
+                std::string sanitized = _stream.str();
+
+                for (const char &c : illegal_characters) {
+                    sanitized.erase(
+                        std::remove(sanitized.begin(), sanitized.end(), c), 
+                        sanitized.end()
+                    );
+                }
+
+                this->clear();
+                this->append(sanitized);
+                return *this;
+            }
+            
+            string contains(const std::string &occurence) & 
             {
                 std::smatch match;
                 std::regex regex(occurence);

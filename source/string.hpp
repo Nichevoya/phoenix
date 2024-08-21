@@ -90,28 +90,30 @@ namespace phoenix {
                 return "";
             }
 
-            string lowercase(void) 
+            const string &lowercase(void) & 
             {
-                std::string lower = get();
+                std::string lower = _stream.str();
                 std::transform(lower.begin(), lower.end(), lower.begin(),
                 [] (unsigned char c) { return std::tolower(c); });
 
-                return lower;
+                this->input(lower);
+                return *this;
             }
 
-            string uppercase(void) 
+            const string &uppercase(void) & 
             {
-                std::string lower = get();
-                std::transform(lower.begin(), lower.end(), lower.begin(),
+                std::string upper = _stream.str();
+                std::transform(upper.begin(), upper.end(), upper.begin(),
                 [] (unsigned char c) { return std::toupper(c); });
 
-                return lower;
+                this->input(upper);
+                return *this;
             }
 
-            const string endl(void)
+            const string &endl(void) & 
             {
-                this->stream() << std::endl;
-                return get();
+                _stream << std::endl;
+                return *this;
             }
 
         protected:

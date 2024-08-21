@@ -51,10 +51,10 @@ namespace phoenix {
                 (_stream << ... << args);
             }
 
-            void clear(void)
+            void clear(void) & 
             {
-                _stream.clear();
-                get().clear();
+                std::stringstream stream;
+                _stream.swap(stream);
             }
 
             std::size_t size(void) const { return get().size(); }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iomanip>
+
 namespace phoenix {
 
     template <typename T = int32_t>

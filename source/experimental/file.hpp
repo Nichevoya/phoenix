@@ -9,15 +9,15 @@ namespace phoenix {
 
         class file {
             public:
-                file() {}
+                file() = default;
                 file(const std::string &file) : _file(file) { create(file); }
-                file(const string &file) : _file(file.get()) { create(file); }
+                file(const string &file) : _file(file.value()) { create(file); }
                 ~file() { _file.close(); }
 
                 void create(const char *file)
                 {
                     if (_file.is_open()) return;
-                    _file.open(string(file).get(), std::fstream::out);
+                    _file.open(file, std::fstream::out);
                 }
 
                 void create(const std::string &file)
@@ -29,12 +29,12 @@ namespace phoenix {
                 void create(const string &file)
                 {
                     if (_file.is_open()) return;
-                    _file.open(file.get(), std::fstream::out);
+                    _file.open(file.value(), std::fstream::out);
                 }
 
                 void write(const char *data)
                 {
-                    _file << string(data);
+                    _file << data;
                 }
 
                 void write(const std::string &data)
@@ -44,7 +44,7 @@ namespace phoenix {
 
                 void write(const string &data)
                 {
-                    _file << data.get();
+                    _file << data.value();
                 }
         
             protected:

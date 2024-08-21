@@ -1,4 +1,7 @@
-#pragma once
+#pragma once 
+
+#include <memory>
+#include <iostream>
 
 #include "std.hpp"
 

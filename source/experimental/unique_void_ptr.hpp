@@ -1,23 +1,23 @@
-#pragma once
+#pragma once 
 
-#include "std.hpp"
+#include <memory>
 
 namespace phoenix {
 
     namespace experimental {
 
-        using unique_void_ptr = std::unique_ptr<void, void (*)(void const *)>;
+        using unique_void_ptr = std::unique_ptr<void, void (*)(const void *)>;
 
         template<typename T>
-        auto unique_void(T *ptr) -> unique_void_ptr
+        unique_void_ptr unique_void(T *ptr) 
         {
-            return unique_void_ptr(ptr, [](void const *data) {
+            return unique_void_ptr(ptr, [] (void const *data) {
                 delete static_cast<T const *>(data);
             });
         }
 
         template<typename T, typename... Args>
-        auto make_unique_void(Args&&... args) -> unique_void_ptr
+        unique_void_ptr make_unique_void(Args&&... args) 
         {
             return unique_void(new T(std::forward<Args>(args)...));
         }

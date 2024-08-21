@@ -1,6 +1,5 @@
 #pragma once
 
-#include "std.hpp"
 #include "string.hpp"
 
 namespace phoenix {
@@ -30,11 +29,8 @@ namespace phoenix {
 
             const string get(void) const & { return _stream.str(); }
 
+        protected:
         private:
-            std::stringstream _stream;
-            const colors &_color = colors::none;
-            const std::string _message = "", _color_code = "";
-
             const char *get_color_code(void) const &
             {
                 switch (_color) {
@@ -50,6 +46,9 @@ namespace phoenix {
                 }
             }
 
+            std::stringstream _stream;
+            const colors &_color = colors::none;
+            const std::string _message = "", _color_code = "";
     };
 
 };

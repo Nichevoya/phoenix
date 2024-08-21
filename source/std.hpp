@@ -1,6 +1,4 @@
-#pragma once
-
-/* ----------------------------------- std ---------------------------------- */
+#pragma once 
 
 #ifdef UNIX
     #define platform "unix"
@@ -13,31 +11,3 @@
 
     #include <windows.h>
 #endif
-
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <cstring>
-#include <string>
-#include <regex>
-
-#include <assert.h>
-
-#include <filesystem>
-
-#include <typeinfo>
-#include <bitset>
-#include <set>
-
-#include <memory>
-#include <thread>
-#include <mutex>
-
-#include <chrono>
-#include <random>
-
-#include <unordered_map>
-#include <vector>
-#include <array>
-#include <queue>
-#include <map>

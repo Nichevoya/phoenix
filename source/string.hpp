@@ -21,8 +21,9 @@ namespace phoenix {
             
             ~string() = default;
 
-            std::string get(void) { return stream().str(); }
-            const std::string get(void) const { return stream().str(); }
+            const std::stringstream &stream(void) const & { return _stream; }
+
+            const std::string value(void) const & { return stream().str(); }
 
             std::stringstream &stream(void) { return _stream; }
             const std::stringstream &stream(void) const { return _stream; }

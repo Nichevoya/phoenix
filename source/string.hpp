@@ -68,7 +68,10 @@ namespace phoenix {
                 _stream.swap(stream);
             }
 
-            std::size_t size(void) const { return get().size(); }
+            std::size_t size(void) const & 
+            {
+                return _stream.str().size();
+            }
 
             const string &sanitize(const std::string &illegal_characters, const std::size_t &size) & 
             {

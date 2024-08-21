@@ -90,22 +90,14 @@ namespace phoenix {
                 this->input(sanitized);
                 return *this;
             }
-            
-            string contains(const std::string &occurence) & 
-            {
-                std::smatch match;
-                std::regex regex(occurence);
-                const std::string &str = get();
-                while (std::regex_search(str, match, regex)) return match.str();
-                return "";
-            }
 
-            string contains(const std::string &occurence)
+            const std::string contains(const std::string &occurence) const & 
             {
                 std::smatch match;
                 std::regex regex(occurence);
-                const std::string &str = get();
-                while (std::regex_search(str, match, regex)) return match.str();
+                const std::string &str = _stream.str();
+                while (std::regex_search(str, match, regex)) {}
+                    return match.str();
                 return "";
             }
 

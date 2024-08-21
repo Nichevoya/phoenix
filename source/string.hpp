@@ -25,18 +25,31 @@ namespace phoenix {
 
             const std::string value(void) const & { return stream().str(); }
 
-            std::stringstream &stream(void) { return _stream; }
-            const std::stringstream &stream(void) const { return _stream; }
-
             template <typename ...Args>
-            void input(Args &&...args)
+            void append(Args &&...args)
             {
-                if (!get().empty()) clear();
                 (_stream << ... << args);
             }
 
             template <typename ...Args>
-            void append(Args &&...args) { get().append((std::stringstream() << ... << args).str()); }
+            void append(const Args &&...args)
+            {
+                (_stream << ... << args);
+            }
+
+            template <typename ...Args>
+            void input(Args &&...args)
+            {
+                this->clear();
+                (_stream << ... << args);
+            }
+
+            template <typename ...Args>
+            void input(const Args &&...args)
+            {
+                this->clear();
+                (_stream << ... << args);
+            }
 
             void clear(void)
             {

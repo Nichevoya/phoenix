@@ -7,17 +7,28 @@ namespace phoenix {
 
     class string {
         public:
-            friend std::ostream &operator<<(std::ostream &os, const string &other) { return os << other.get(); }
+            friend std::ostream &operator<<(std::ostream &os, const string &other) { return os << other.value(); }
+            phoenix::string &operator=(const phoenix::string &other) 
+            {
+                this->input(other.value());
+                return *this;
+            }
 
-            operator std::string() const { return this->get(); }
+            operator std::string() const & { return this->value(); }
 
             string() = default;
 
             template <typename ...Args>
-            string(Args &&...args) { (_stream << ... << args); }
+            string(Args &&...args) 
+            {
+                (_stream << ... << args);
+            }
 
             template <typename ...Args>
-            string(const Args &&...args) { (_stream << ... << args); }
+            string(const Args &&...args) 
+            {
+                (_stream << ... << args);
+            }
             
             ~string() = default;
 

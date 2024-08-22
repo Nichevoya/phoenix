@@ -29,14 +29,14 @@ namespace phoenix {
             {
                 _input = "";
                 _message = message;
-                _prompt = prompt;
+
+                if (!prompt.empty())
+                    _prompt = prompt;
 
                 if (!_message.empty()) 
                     output_message();
                 
-                if (!prompt.empty())
-                    this->prompt();
-                
+                this->prompt();
                 getline();
 
                 return _input;

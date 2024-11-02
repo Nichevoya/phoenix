@@ -65,6 +65,7 @@
                     {
                         using unique = typename smart_type_allocator<T>::unique;
                         if (!_handler.open(file)) throw std::runtime_error(_handler.error());
+                        if (entry_point.empty()) return nullptr;
                         _file = file;
                         return _handler.load<unique>(_entry_point)();
                     }
@@ -82,6 +83,7 @@
                     {
                         using shared = typename smart_type_allocator<T>::shared;
                         if (!_handler.open(file)) throw std::runtime_error(_handler.error());
+                        if (entry_point.empty()) return nullptr;
                         _file = file;
                         return _handler.load<shared>(_entry_point)();
                     }

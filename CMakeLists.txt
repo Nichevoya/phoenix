@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.27.4)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project("Phoenix")
@@ -21,7 +21,7 @@ if (UNIX)
     add_definitions(-DUNIX)
     
     set(COMPILATION_FLAGS
-        -std=c++23 -fPIC 
+        -std=c++20 -fPIC 
         -Wall -Wextra -Werror -Wpedantic -g 
     )
 

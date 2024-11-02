@@ -11,8 +11,8 @@ namespace phoenix {
         template<typename T>
         unique_void_ptr unique_void(T *ptr) 
         {
-            return unique_void_ptr(ptr, [] (void const *data) {
-                delete static_cast<T const *>(data);
+            return unique_void_ptr(ptr, [] (const void *data) {
+                delete static_cast<const T *>(data);
             });
         }
 

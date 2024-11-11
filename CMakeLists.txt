@@ -9,10 +9,10 @@ project("Phoenix")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DDEBUG_MODE)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Validation")
+    add_definitions(-DVALIDATION_MODE)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     add_definitions(-DRELEASE_MODE)
-elseif(CMAKE_BUILD_TYPE STREQUAL "Distribution")
-    add_definitions(-DDIST_MODE)
 endif()
 
 # ------------------------------ configuration ----------------------------- 
